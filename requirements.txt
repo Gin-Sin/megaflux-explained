@@ -1,0 +1,2 @@
+manim==0.20.1
+playwright==1.58.0

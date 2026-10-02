@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f3eb">
+  <meta name="description" content="Learn MegaFlux through original Manim animations, an interactive expert-replication planner, and a careful reading of the paper's evidence.">
+  <meta property="og:title" content="MegaFlux, explained — Move the work. Hide the cost.">
+  <meta property="og:description" content="A visual field guide to skew-resilient MoE megakernels, with Manim illustrations and an interactive planner.">
+  <meta property="og:type" content="article">
+  <title>MegaFlux, explained</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#article">Skip to article</a>
+<div id="reading-progress" aria-hidden="true"></div>
+<header class="site-header">
+  <a class="wordmark" href="./"><span class="brand-symbol" aria-hidden="true">m<span>f</span></span> SYSTEMS / EXPLAINED</a>
+  <nav aria-label="Site"><a href="#straggler">Read</a><a href="storyboard.html">Storyboard</a><a href="https://arxiv.org/html/2610.00671v1">Paper <span aria-hidden="true">↗</span></a><a class="source-link" href="https://github.com/Gin-Sin/megaflux-explained">Source <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main id="article">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">PAPER FIELD NOTES <span>01 / MoE SYSTEMS</span></p>
+      <h1>MegaFlux,<br><em>explained.</em></h1>
+      <p class="hero-thesis">Move the work. Hide the cost.</p>
+      <p class="hero-intro">One busy expert can leave a cluster waiting. MegaFlux gives that expert more places to run—and overlaps the communication needed to make it happen.</p>
+      <a class="button" href="#straggler">Follow the idea <span aria-hidden="true">↓</span></a>
+      <p class="hero-meta">A visual guide · ~22 min · Paper v1 / 30 Sep 2026</p>
+    </div>
+    <figure class="hero-diagram">
+      <svg viewBox="0 0 520 490" role="img" aria-labelledby="hero-title hero-desc">
+        <title id="hero-title">From one hot GPU to shared expert work</title>
+        <desc id="hero-desc">Four GPUs begin with 12, 4, 4, and 4 blocks. Copying the hot expert lets each GPU execute six blocks. This is a compute-load schematic; copying the expert also costs communication.</desc>
+        <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#334253"/></pattern></defs>
+        <rect width="520" height="490" rx="12" fill="#101d2d"/>
+        <rect x="20" y="20" width="480" height="450" fill="url(#dots)" opacity=".65"/>
+        <g font-family="ui-monospace,monospace" font-size="13" fill="#a9b8c8">
+          <text x="32" y="42">FIXED PLACEMENT</text><text x="32" y="273">REPLICATE + REDISTRIBUTE</text>
+          <text x="32" y="92">GPU 0</text><text x="32" y="128">GPU 1</text><text x="32" y="164">GPU 2</text><text x="32" y="200">GPU 3</text>
+          <text x="32" y="323">GPU 0</text><text x="32" y="359">GPU 1</text><text x="32" y="395">GPU 2</text><text x="32" y="431">GPU 3</text>
+        </g>
+        <g fill="#ffc078">
+          <rect x="105" y="75" width="324" height="24" rx="3"/><rect x="105" y="306" width="162" height="24" rx="3"/>
+          <rect x="213" y="342" width="54" height="24" rx="3"/><rect x="213" y="378" width="54" height="24" rx="3"/><rect x="213" y="414" width="54" height="24" rx="3"/>
+        </g>
+        <g fill="#65d6bc"><rect x="105" y="111" width="108" height="24" rx="3"/><rect x="105" y="342" width="108" height="24" rx="3"/></g>
+        <g fill="#82b5eb"><rect x="105" y="147" width="108" height="24" rx="3"/><rect x="105" y="378" width="108" height="24" rx="3"/></g>
+        <g fill="#b6a3f5"><rect x="105" y="183" width="108" height="24" rx="3"/><rect x="105" y="414" width="108" height="24" rx="3"/></g>
+        <g stroke="#101d2d" stroke-width="2" opacity=".7"><path d="M132 75v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24m27-24v24"/><path d="M132 306v24m27-24v24m27-24v24m27-24v24m27-24v24"/></g>
+        <g font-family="ui-monospace,monospace" font-size="14" fill="#f4f0e6"><text x="443" y="92">12</text><text x="228" y="128">4</text><text x="228" y="164">4</text><text x="228" y="200">4</text><text x="282" y="323">6</text><text x="282" y="359">6</text><text x="282" y="395">6</text><text x="282" y="431">6</text></g>
+        <path d="M465 111v110h-40m8-7-8 7 8 7" fill="none" stroke="#ffc078" stroke-width="1.5"/>
+        <text x="260" y="243" font-family="ui-monospace,monospace" font-size="12" fill="#ffc078">same expert · more GPUs</text>
+        <text x="320" y="381" font-family="ui-monospace,monospace" font-size="12" fill="#65d6bc">24 blocks</text><text x="320" y="400" font-family="ui-monospace,monospace" font-size="12" fill="#a9b8c8">before and after</text>
+      </svg>
+      <figcaption>Same routed work. A shorter busiest queue.<span>Illustrative block counts; transfer costs omitted.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="reader-contract">
+    <p><strong>For ML engineers.</strong> Bring matrix multiplication and basic transformer knowledge. We’ll build the expert-parallel execution model as we go.</p>
+    <p><strong>By the end:</strong> explain the planner, trace the forward/backward dependencies, and judge what the speedups actually establish.</p>
+    <p class="small">Based on <a href="https://arxiv.org/abs/2610.00671">Yao et al., MegaFlux</a>. Independent explanation; results are reported by the authors. This is a design tutorial, not a CUDA implementation guide.</p>
+  </div>
+
+  <div class="article-layout">
+    <aside class="chapter-nav" aria-label="Article chapters">
+      <p class="eyebrow">THE READING PATH</p>
+      <nav><a href="#straggler"><span>01</span> The straggler</a><a href="#planner"><span>02</span> The plan</a><a href="#forward"><span>03</span> Forward</a><a href="#backward"><span>04</span> Backward</a><a href="#evidence"><span>05</span> The evidence</a><a href="#judgment"><span>06</span> Your judgment</a><a href="#check"><span>↳</span> Check your model</a></nav>
+      <a class="aside-link" href="storyboard.html">Behind the article ↗</a>
+    </aside>
+    <div class="article-body">
+    <section id="straggler">
+      <p class="section-number">01 / THE PROBLEM</p>
+      <h2>A faster kernel can still wait.</h2>
+      <p class="lead">A mixture-of-experts layer finishes at the pace of its busiest GPU. Making each GPU efficient does not make their workloads equal.</p>
+      <p>In a <strong>mixture-of-experts (MoE)</strong> layer, a router chooses a small set of feed-forward networks—experts—for each token. With <strong>expert parallelism</strong>, different GPUs own different experts. A token must travel to a GPU holding its selected expert’s weights, run through that expert, and return for a weighted combination with the other selected experts’ outputs.</p>
+      <div class="flow" aria-label="MoE execution stages"><span>Route tokens</span><b>→</b><span>Dispatch</span><b>→</b><span>Expert compute</span><b>→</b><span>Return + combine</span></div>
+      <p>A conventional implementation separates communication and computation into GPU kernels. A <strong>persistent megakernel</strong> keeps worker groups resident and lets them process ready pieces of work: one group moves tokens while another multiplies matrices. Readiness flags connect producers to consumers. MegaMoE already uses this approach; MegaFlux extends it. Metadata routing and the final top-<em>k</em> sum still use separate launches. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S2.SS1">[§2.1]</a></p>
+      <p>Now suppose four GPUs receive 12, 4, 4, and 4 equal-cost blocks of work. The average is six, but GPU 0 must execute twelve. The other GPUs cannot take its extra blocks because they do not hold that expert’s weights. Communication/computation overlap inside each GPU leaves this placement constraint intact.</p>
+      <figure class="animation">
+        <div class="video-wrap"><span class="film-label">MANIM / 01</span><video controls playsinline preload="none" poster="assets/routing-skew.png" aria-label="Animation: reassigning expert blocks to replicas" aria-describedby="skew-caption"><source src="assets/routing-skew.mp4" type="video/mp4">Your browser cannot play this video. Read the transcript below.</video></div>
+        <figcaption id="skew-caption"><strong>Redistributing the same expert’s blocks shortens the busiest queue.</strong> Four-GPU schematic; moving weights has an additional cost.</figcaption>
+        <details class="transcript"><summary>Read the animation transcript</summary><p>GPU 0 owns expert E0 and begins with 12 amber blocks. GPUs 1–3 each have four blocks of their own experts. After receiving copies of E0’s weights, each takes two E0 blocks. All four GPUs now have six blocks. The total stays at 24. This halves the maximum block load in the example; it does not establish a 2× wall-clock speedup.</p></details>
+      </figure>
+      <p><strong>Routing skew</strong> means some experts receive more assignments than others. Skew becomes a GPU straggler when the resulting work concentrates on particular owners. The paper measures real routing profiles and finds 7.3–41.0% higher fixed-placement latency than its balanced-route comparison. That motivates replication, but does not imply that every skewed workload benefits. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S2.SS2">[§2.2]</a></p>
+      <details><summary>Two kinds of imbalance: experts versus GPUs</summary><p>The paper measures expert skew with κ = E Σ<sub>e</sub>(c<sub>e</sub> / Σ<sub>j</sub>c<sub>j</sub>)², where c<sub>e</sub> counts assignments to expert e. Uniform expert loads give κ = 1. But runtime depends on the sum of work assigned to each GPU. The same expert-load histogram can produce different GPU loads under different ownership arrangements. MegaFlux’s planner therefore optimizes per-GPU block load.</p></details>
+      <div class="takeaway"><span>KEEP THIS IDEA</span><p>Fusion improves how assigned work executes. Replication expands where that work can execute.</p></div>
+    </section>
+
+    <section id="planner">
+      <p class="section-number">02 / THE PLACEMENT DECISION</p>
+      <h2>Move blocks. Preserve the model.</h2>
+      <p class="lead">MegaFlux changes the GPU that executes an assignment while preserving the router’s expert choices and weights.</p>
+      <p>A replica holds a copy of an expert’s parameters. If token t selected expert E0, it still runs E0—possibly on another GPU. The planner preserves token identities, expert selections, assignment counts, and routing weights. It neither drops inconvenient tokens nor sends them to a less busy, different expert. This preserves the intended model computation, subject to the implementation’s numerical behavior. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S3.SS1">[§3.1]</a></p>
+      <h3>Partition first; assign second.</h3>
+      <p>GPU matrix multiplication processes tiles. Splitting an expert’s token count independently across copies can create several partly filled tiles. MegaFlux instead partitions that expert’s routed rows into blocks of at most β rows <em>before</em> assigning the blocks to GPUs. An expert has b<sub>e</sub> = ⌈c<sub>e</sub>/β⌉ blocks, with at most one partial block across all its copies. The main evaluation uses β = 128.</p>
+      <div class="worked-example"><span class="eyebrow">A SMALL EXAMPLE</span><p>300 routed rows become <strong>128 + 128 + 44</strong>. Move a complete 128-row block to a replica and keep the remaining blocks on the owner. Only the 44-row block is partial. Splitting into 150 rows per copy would instead produce <strong>128 + 22</strong> on both copies.</p></div>
+      <p>The planner chooses q<sub>er</sub>, the integer number of expert e’s blocks assigned to GPU r. It minimizes the largest GPU load, while conserving every expert’s blocks and limiting the number of remote experts each GPU hosts. A replica consumes one slot whether it receives one block or twenty.</p>
+      <div class="equation" role="math" aria-label="Minimize the maximum GPU load, where GPU r's load is the sum of expert blocks assigned to it"><span>minimize <strong>max<sub>r</sub> ℓ<sub>r</sub></strong></span><span>ℓ<sub>r</sub> = Σ<sub>e</sub> q<sub>er</sub></span></div>
+      <details><summary>The constraints and the four-candidate heuristic</summary><p>For every expert, Σ<sub>r</sub> q<sub>er</sub> = b<sub>e</sub>. For every GPU r, Σ<sub>e: h(e) ≠ r</sub> 1[q<sub>er</sub> &gt; 0] ≤ s, where h(e) is the owner and s is the replica budget. All q values are nonnegative integers.</p><p>The target is τ = ⌈Σ<sub>e</sub>b<sub>e</sub>/P⌉ blocks per GPU. Four warps independently search four candidates: two donor priorities crossed with two fan-out policies. They reuse existing replicas, then open new copies on eligible underloaded GPUs. A transfer moves min(owner’s remaining blocks, receiver’s room below τ). It is <em>not</em> capped by the donor’s excess, so a donor may become underloaded.</p><p>Each search stops after s + 2 rounds or a round without movement. The planner selects the smallest maximum load, breaks ties by fewer replicas, then prunes and refines. This is a bounded heuristic, not a guarantee of the mathematical optimum. Finally it builds a block-to-GPU table from a stable ordering of routed assignments. <a href="https://arxiv.org/html/2610.00671v1#A1">[Appendix A]</a></p></details>
+
+      <div class="interactive" id="planner-lab">
+        <div class="lab-heading"><div><p class="eyebrow">TRY THE BLOCK MODEL</p><h3>Give the busy expert somewhere to go.</h3></div><button type="button" id="reset-planner">Reset</button></div>
+        <p class="small">Four GPUs, one home expert each. E1–E3 have 8 blocks each. This CPU model follows the paper’s placement and pruning ideas; it does not estimate latency.</p>
+        <div class="lab-controls"><label for="hot-load">E0 blocks <output id="hot-value" for="hot-load">24</output><input type="range" id="hot-load" min="8" max="96" step="4" value="24"></label><label for="replica-budget">Replica slots per GPU<select id="replica-budget"><option value="0">0 — fixed placement</option><option value="1" selected>1 spare slot</option><option value="2">2 spare slots</option></select></label></div>
+        <label class="checkbox"><input type="checkbox" id="training-mode"> Apply training’s reduction-aware pruning (λ = 12)</label>
+        <div class="chart-key"><span><i class="key-before"></i> Before: total blocks</span><span><i class="key-after"></i> After: blocks by expert</span></div>
+        <div id="load-chart" aria-label="GPU block assignments"></div>
+        <div class="lab-metrics"><div><strong id="max-load">24 → 12</strong><span>maximum GPU load</span></div><div><strong id="replica-count">3</strong><span>remote replicas</span></div><div><strong id="block-total">48</strong><span>blocks conserved</span></div><div><strong id="ideal-load">12</strong><span>average-load bound</span></div></div>
+        <p id="planner-summary" class="small" aria-live="polite"></p>
+        <p id="training-note" class="lab-note" hidden>Each remote replica adds a fixed penalty at its expert’s <strong>owner</strong>. A tiny assignment still produces a full weight-gradient partial. The pruning pass can prefer fewer replicas and a less balanced compute load.</p>
+        <noscript><p>The interactive model needs JavaScript. The default example redistributes 24/8/8/8 blocks into 12/12/12/12, using three replicas of E0 and conserving all 48 blocks.</p></noscript>
+      </div>
+      <p class="try-it"><strong>Try this:</strong> compare zero and one replica slot. Then enable training mode at 24 E0 blocks and at 96. Why does the same spare capacity lead to different decisions? Section 4 explains the owner-side cost.</p>
+      <div class="takeaway"><span>THE NEXT CONSTRAINT</span><p>A balanced assignment is only a plan. The destination still needs the expert’s weights before it can execute.</p></div>
+    </section>
+
+    <section id="forward">
+      <p class="section-number">03 / FORWARD EXECUTION</p>
+      <h2>A replica can start half ready.</h2>
+      <p class="lead">The first projection needs W1. It can run while the second projection’s W2 is still in flight.</p>
+      <p>Each expert applies an input projection (FC1), a SwiGLU activation, and an output projection (FC2). In the paper’s notation, Z = XW1, A = f(Z), and O = AW2. The router-weighted sum combines the selected experts’ outputs for each token. These equations omit quantization.</p>
+      <p>A separate-stage replication scheme transfers all replica weights before starting expert computation. MegaFlux gives W1 and W2 separate readiness conditions. FC1 starts when <strong>W1 and an input block</strong> are ready. FC2 starts when <strong>W2 and that block’s activation</strong> are ready. No full-replica barrier needs to sit between communication and useful work. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S3.SS2">[§3.2]</a></p>
+      <figure class="animation">
+        <div class="video-wrap"><span class="film-label">MANIM / 02</span><video controls playsinline preload="none" poster="assets/forward-pipeline.png" aria-label="Animation: forward execution overlaps FC1 with W2 transfer" aria-describedby="forward-caption"><source src="assets/forward-pipeline.mp4" type="video/mp4">Read the transcript below.</video></div>
+        <figcaption id="forward-caption"><strong>FC1 can begin after W1 arrives while W2 is still moving.</strong> Input is assumed ready. Bar widths are schematic.</figcaption>
+        <details class="transcript"><summary>Read the animation transcript</summary><p>The upper strip transfers W1, transfers W2, runs FC1, and runs FC2 sequentially. The lower schedule separates transfer and compute lanes. Once W1 arrives, FC1 starts below the ongoing W2 transfer. FC2 waits for both W2 and the FC1 activation. The overlapped interval reduces exposed communication; it does not remove the transfer.</p></details>
+      </figure>
+      <figure class="code-figure"><figcaption>Projection readiness · conceptual pseudocode</figcaption><pre tabindex="0" aria-label="Pseudocode: each projection waits for only its own dependencies"><code><span class="syntax-comment"># Each block is scheduled once its inputs are ready.</span>
+<span class="syntax-keyword">if</span> ready(<span class="syntax-weight">W1</span>) <span class="syntax-keyword">and</span> ready(input_block):
+    schedule(<span class="syntax-function">FC1</span>, input_block)
+
+<span class="syntax-keyword">if</span> ready(<span class="syntax-weight">W2</span>) <span class="syntax-keyword">and</span> ready(activation_block):
+    schedule(<span class="syntax-function">FC2</span>, activation_block)</code></pre></figure>
+      <p>Weight movement shares the megakernel’s communication workers. A small subset services replica weights from the start. Other input-transfer warps first finish their assigned token blocks, then join the weight-transfer queue. Owned experts can compute while replica weights move. The schedule gains overlap without reserving a completely separate worker group for replication.</p>
+      <details><summary>What “ready” means at the execution level</summary><p>A cooperative thread array (CTA) is a GPU thread block. Persistent CTAs contain worker groups with different roles, such as loading operands, moving tokens, performing matrix operations, and writing results. Loaders obey projection-level weight readiness and tile-level activation dependencies. The design uses Blackwell matrix instructions, tensor memory, and Tensor Memory Accelerator operand staging; those mechanisms make the pipeline possible, but the key logical rule is that a consumer waits only for the data it actually needs.</p></details>
+      <div class="takeaway"><span>THE FORWARD IDEA</span><p>Make readiness specific to the next operation, so unrelated work can continue.</p></div>
+    </section>
+    <section id="backward">
+      <p class="section-number">04 / BACKWARD EXECUTION</p>
+      <h2>Bring every partial to the table.</h2>
+      <p class="lead">Training adds a second bill: every replica produces parameter gradients that must be accumulated at the expert’s owner.</p>
+      <p>Backward has two jobs. <strong>Data gradients (DGrad)</strong> propagate the loss gradient toward the input. <strong>Weight gradients (WGrad)</strong> accumulate how the expert’s parameters should change. When multiple GPUs process different rows for one expert, each contributes a partial weight gradient for that expert. The owner must combine those contributions.</p>
+      <details><summary>Follow the backward algebra</summary><p>For expert e, let D[t] = p<sub>t,e</sub> dy<sub>t</sub>, the output gradient scaled by that token’s routing weight. Let dZ be the SwiGLU backward result. Ignoring quantization:</p><div class="table-scroll"><table><caption>Dependencies for one expert</caption><thead><tr><th>Operation</th><th>Expression</th><th>What it needs</th></tr></thead><tbody><tr><td>Activation gradient</td><td>dA = DW2ᵀ</td><td>Output gradient, W2</td></tr><tr><td>Input gradient</td><td>dX = dZW1ᵀ</td><td>SwiGLU backward result, W1</td></tr><tr><td>Output-weight gradient</td><td>dW2 = AᵀD</td><td>Activations, output gradients</td></tr><tr><td>Input-weight gradient</td><td>dW1 = XᵀdZ</td><td>Input rows, dZ</td></tr></tbody></table></div><p>Each copy computes these weight-gradient products over its assigned rows. Summing the copies’ partials recovers the full expert gradient in the mathematical computation. <a href="https://arxiv.org/html/2610.00671v1#S2.SS1">[§2.1, Eq. 2]</a></p></details>
+      <h3>First, overlap the inputs to backward.</h3>
+      <p>DGrad consumes W2 before W1, reversing forward’s weight order. Projection-level readiness lets one transfer overlap with ongoing computation. In the MXFP8 implementation, DGrad and WGrad reduce along different matrix dimensions, so WGrad also needs operands requantized along the token axis. Communication workers perform this preparation during otherwise idle intervals. CTAs transition independently from DGrad to WGrad after retiring their previous accumulator state.</p>
+      <h3>Then, advance the last prerequisite for reduction.</h3>
+      <p>Producing one replica’s gradient early is insufficient. The owner can reduce a particular gradient tile only after <strong>all participating GPUs</strong> have produced their matching partials. MegaFlux prioritizes replicated experts’ gradient preparation and tile production on every participant. Once the required partials are ready, the owner pulls and accumulates them in FP32 in a fixed order while other tiles continue computing. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S3.SS2">[§3.2]</a></p>
+      <figure class="animation">
+        <div class="video-wrap"><span class="film-label">MANIM / 03</span><video controls playsinline preload="none" poster="assets/backward-reduction.png" aria-label="Animation: gradient reduction waits for matching partials from every participant" aria-describedby="backward-caption"><source src="assets/backward-reduction.mp4" type="video/mp4">Read the transcript below.</video></div>
+        <figcaption id="backward-caption"><strong>Reduce a gradient tile when every participating copy has produced its partial.</strong> Coordinate their priorities so reduction can overlap later computation.</figcaption>
+        <details class="transcript"><summary>Read the animation transcript</summary><p>The owner, replica A, and replica B produce partials for gradient tile 0. The first two are ready, but reduction waits for B. Once B publishes its partial, the owner accumulates the contributions in a fixed order. The participants continue producing later tiles during this reduction. Prioritizing the expert on only one GPU would leave the last dependency late.</p></details>
+      </figure>
+      <h3>Why the training planner dislikes tiny replicas.</h3>
+      <p>A replica’s dW1 and dW2 partials have the full parameter dimensions even when it processes few tokens. The added reduction work does not shrink with its token assignment. Load balancing can therefore move computation away from a busy owner while giving that same owner a large gradient-reduction burden.</p>
+      <div class="equation" role="math" aria-label="The reduction-aware proxy is the maximum, over owners r, of block load plus twelve times the number of remote replicas of that owner's experts"><span>C<sub>λ</sub>(q) = max<sub>r</sub>(ℓ<sub>r</sub> + λ n<sub>r</sub>)</span><span>λ = 12</span></div>
+      <p>Here n<sub>r</sub> counts remote copies of experts <em>owned by</em> GPU r. It does not count the replicas GPU r hosts. After load-only search and refinement, a pruning pass uses this proxy to remove small replicas; it may accept worse compute balance to reduce owner-side work. The penalty is a fixed heuristic in block units, not a measured conversion to microseconds. If the pruned plan does not strictly improve the proxy over fixed placement, the planner keeps fixed placement. <a class="cite" href="https://arxiv.org/html/2610.00671v1#A1">[Appendix A.2]</a></p>
+      <p>The training plan is selected before forward and reused unchanged for backward. Planning is charged once, to forward. Inference omits this reduction-aware pruning pass.</p>
+      <div class="takeaway"><span>THE BACKWARD IDEA</span><p>Overlap depends on when the last required producer finishes. Schedule the participants together.</p></div>
+    </section>
+
+    <section id="evidence">
+      <p class="section-number">05 / READ THE RESULTS CAREFULLY</p>
+      <h2>Four comparisons. Four different claims.</h2>
+      <p class="lead">The paper separates the effect of replication, the effect of pipelining, comparison with other systems, and end-to-end prefill.</p>
+      <p class="source-note">All numbers in this section are reported in the paper. The experiments were not reproduced for this article.</p>
+      <h3>1. Same megakernel, adaptive versus fixed placement</h3>
+      <div class="results-strip"><div><span>FORWARD / GEOMEAN</span><strong>1.45<span>×</span></strong><p>Maximum: 2.14×</p></div><div><span>BACKWARD / GEOMEAN</span><strong>1.28<span>×</span></strong><p>Maximum: 2.64×</p></div></div>
+      <p>These are speedups over the <strong>same megakernels with fixed expert placement</strong>, across 147 configurations per direction on eight NVIDIA B200 GPUs in one NVLink domain. The grid combines three expert counts, seven token counts, and seven routing families. The configuration speedup is fixed-placement latency divided by MegaFlux latency. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS2">[§4.2, Figure 3]</a></p>
+      <div class="table-scroll"><table><caption>The main grid’s measurement contract (§4.1)</caption><tbody><tr><th scope="row">Model shape</th><td>Hidden/intermediate dimensions 7168/2048; top-8; 64, 128, or 256 experts</td></tr><tr><th scope="row">Work volume</th><td>1K–64K input tokens per rank, in powers of two; 1K = 1024</td></tr><tr><th scope="row">Replica capacity</th><td>25% extra expert slots; 128 rows per token block</td></tr><tr><th scope="row">Precision</th><td>Forward: MXFP4 weights + MXFP8 activations. Backward: MXFP8 operands. FP32 accumulation, BF16 outputs.</td></tr><tr><th scope="row">Included</th><td>Token transport, expert computation, output combination, replica weights; backward also includes replica-gradient reduction</td></tr><tr><th scope="row">Planning</th><td>Forward includes separately measured planning latency. Backward reuses the saved plan.</td></tr><tr><th scope="row">Excluded</th><td>Router and shared expert</td></tr></tbody></table></div>
+      <p><strong>“Trace-derived” does not mean full-model replay.</strong> This grid uses synthetic weights and activations. The authors resize captured expert-load histograms and construct routes that satisfy the token counts and distinct top-<em>k</em> expert constraint. The labels “real-high” and “real-extreme” are percentiles within each source; forward and backward labels need not represent the same κ. The native-model motivating experiment and the end-to-end test are separate. <a class="cite" href="https://arxiv.org/html/2610.00671v1#A2">[Appendix B.1]</a></p>
+      <details><summary>How the main-grid numbers are aggregated</summary><p>Each (expert count, token count, routing family) configuration has three seeded route realizations. Each realization runs in two fresh processes with five warmups and twenty timed iterations. The authors take median rank-maximum latency, then a median across the six realization/run measurements. Forward adds the separately measured median planner time. The headline summary is a geometric mean of configuration speedups, not an arithmetic average of latency reductions.</p></details>
+
+      <h3>2. Same replication plan, separate versus pipelined execution</h3>
+      <p>The ablation fixes replica locations and token-block assignments. The separate-stage variant transfers replica weights before computation and reduces replica gradients afterward. MegaFlux pipelines those operations. This isolates scheduling from the quality of the placement plan.</p>
+      <p>Pipelining yields up to <strong>13.2% additional forward latency reduction</strong> and <strong>26.7% backward reduction</strong> relative to separate-stage replication in the ablation. These percentages use a different denominator from the headline speedups; do not add them to 1.45× or 1.28×. The estimated hidden fraction is 56–76% for forward weight transfers and approximately 91–100% for backward replica operations in selected real-high cases. It is a latency-derived estimate, not a direct measure of link utilization. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS3">[§4.3, Figures 4–5]</a></p>
+
+      <h3>3. Other implementations, under BF16</h3>
+      <p>The prior-art comparison uses a BF16 MegaFlux variant and BF16 baselines, rather than the main grid’s low precision. It reports geometric-mean forward/backward speedups of 2.31×/1.53× over Megatron-Core and 1.74×/2.35× over UltraEP. Both use DeepEP and Transformer Engine grouped matrix multiplication. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS4">[§4.4]</a></p>
+      <p>Unmodified Mixture-of-Kittens performs additional shared-expert work and, during backward, routing-coefficient gradients. Raw comparisons therefore cover unequal work. The paper adds a serial estimate of that extra work to MegaFlux and reports adjusted speedups of 1.70× forward and 1.26× backward. Treat that adjustment as a comparable-work estimate, with its stated assumptions.</p>
+
+      <h3>4. End-to-end vLLM prefill</h3>
+      <p>The authors integrate MegaFlux into vLLM 0.27.1 for DeepSeek-V4-Pro-0813 on eight B200 GPUs. They use 160 LongBench-Pro prompts and two replica slots per rank. The measured interval ends when <strong>every request in the batch has produced its first output token</strong>. These results establish prefill-oriented batch latency gains for that setup, not steady-state decode throughput. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS6">[§4.6]</a></p>
+      <div class="table-scroll"><table class="speedup-table"><caption>Table 1: median end-to-end speedup over fixed placement</caption><thead><tr><th scope="col">Batch size</th><th scope="col">16K chunk budget / GPU</th><th scope="col">32K chunk budget / GPU</th></tr></thead><tbody><tr><th scope="row">8</th><td>1.128×</td><td>1.133×</td></tr><tr><th scope="row">16</th><td>1.227×</td><td>1.238×</td></tr><tr><th scope="row">32</th><td>1.165×</td><td class="highlight-cell">1.260×</td></tr></tbody></table></div>
+      <details><summary>Why a layer gain becomes a smaller application gain</summary><p>Only part of an application’s time is spent in the accelerated operation. As an illustrative Amdahl calculation, if half the original time were accelerated by 1.45×, the total speedup would be 1 / (0.5 + 0.5/1.45) ≈ 1.18×. The 50% fraction is invented for explanation; this does not derive the paper’s measured vLLM results.</p></details>
+    </section>
+
+    <section id="judgment">
+      <p class="section-number">06 / ENGINEERING JUDGMENT</p>
+      <h2>Balance is necessary. Profit is conditional.</h2>
+      <p class="lead">Replication is useful when reduced straggler time exceeds the planning and communication that remain exposed.</p>
+      <p>The paper gives clear counterexamples to universal gains. Balanced routes have geometric-mean speedups of 0.985× forward and 0.999× backward—near parity, with slight overhead. Some small skewed backward workloads fall to 0.91×. Across one planner experiment, planning itself takes roughly 43–72 μs depending on expert count and workload. Small kernels have less computation over which to amortize that cost. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS2">[§4.2]</a> <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS5">[§4.5]</a></p>
+      <div class="decision-rule"><p class="eyebrow">A REASONING TOOL, NOT THE PAPER’S COST MODEL</p><p>Saved straggler time<br><span>&gt; planning + exposed weight transfer + exposed gradient reduction</span></p></div>
+      <p>This inequality organizes the implementation decision; the paper does not implement an adaptive profitability gate based on it. The reduction-aware proxy is a narrower heuristic. A runtime gate and topology-aware replication across nodes are explicitly left to future work. Evaluation stays inside one NVLink domain. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S4.SS6">[§4.6]</a></p>
+      <div class="judgment-grid"><div><h3>Look for</h3><ul><li>Repeated work concentration on a few owner GPUs.</li><li>Enough expert computation to amortize planning.</li><li>Spare memory for replica weights and required buffers.</li><li>Communication that can overlap useful compute.</li></ul></div><div><h3>Measure before adopting</h3><ul><li>End-to-end latency for your actual token regime.</li><li>The exposed cost of transfers and reductions.</li><li>Performance on balanced and small workloads.</li><li>Your interconnect topology and numerical behavior.</li></ul></div></div>
+      <p>Replication itself has a long history in MoE systems. The distinctive contribution here is coupling current-route, block-level placement with the fine-grained dependencies of persistent execution. Forward makes weights available by projection. Backward brings all contributors to a reducible tile earlier. That is the mechanism to carry into your next reading of the paper. <a class="cite" href="https://arxiv.org/html/2610.00671v1#S5">[§5]</a></p>
+    </section>
+
+    <section id="check" class="knowledge-check">
+      <p class="section-number">RECONSTRUCT THE DESIGN</p>
+      <h2>Check your mental model.</h2>
+      <p>Answer each question before opening the explanation.</p>
+      <details><summary>Why can’t a perfectly overlapped fixed-placement megakernel solve routing skew?</summary><p>Overlap changes when a GPU moves and computes its assigned work. Fixed placement still forces each expert’s work onto its owner. The overloaded owner remains the straggler even if each of its operations runs efficiently.</p></details>
+      <details><summary>A token chose expert E0. Can the planner send it to E1 to balance the load?</summary><p>No. It may send that assignment to another GPU holding an E0 replica. The selected expert, token identity, and routing weight remain the same.</p></details>
+      <details><summary>W1 has arrived, W2 has not. What else must be ready before FC1 starts?</summary><p>The input token block. FC1 needs both its W1 weights and its input. FC2 later needs W2 and the activation block produced by FC1.</p></details>
+      <details><summary>One replica produces its gradient early. Why might reduction still start late?</summary><p>The owner needs matching partials from every participating copy. A late producer holds up the tile. Coordinated priority across participants advances the final prerequisite.</p></details>
+      <details><summary>Does “99.6% of assignment imbalance removed” mean 99.6% lower latency?</summary><p>No. It measures the reduction in the busiest GPU’s excess valid assignments above the average, for the specified forward settings. It says nothing directly about transfer, planning, or reduction time. See Appendix B.2. The headline forward layer speedup is 1.45×, which corresponds to about 31% lower latency for a hypothetical case with exactly that speedup—not 99.6%.</p></details>
+    </section>
+
+    <section id="reference" class="references">
+      <p class="section-number">KEEP BESIDE THE PAPER</p>
+      <h2>A compact glossary.</h2>
+      <dl class="glossary"><div><dt>Owner</dt><dd>The GPU storing an expert’s original parameters and collecting its replica gradients.</dd></div><div><dt>Replica</dt><dd>An additional copy of an expert’s weights on another GPU.</dd></div><div><dt>Token–expert assignment</dt><dd>One token’s work for one selected expert. A top-8 token creates eight assignments.</dd></div><div><dt>Token block</dt><dd>Up to β routed rows from one expert, assigned together to a GPU.</dd></div><div><dt>Persistent kernel</dt><dd>A kernel whose resident workers repeatedly execute scheduled work instead of relaunching for every stage.</dd></div><div><dt>Readiness</dt><dd>A dependency condition indicating that an operation’s required data is available.</dd></div><div><dt>Exposed overhead</dt><dd>Added cost that remains on the latency-critical path after overlap.</dd></div></dl>
+      <h3>Sources and attribution</h3>
+      <p><strong>Research:</strong> Jianzhu Yao, Siva Kumar Sastry Hari, Vignesh Balaji, Sana Damani, Insu Jang, Pramod Viswanath, and Christos Kozyrakis. <a href="https://arxiv.org/html/2610.00671v1"><em>MegaFlux: Skew-Resilient MoE Megakernels via Pipelined Expert Replication.</em></a> arXiv:2610.00671v1, submitted September 30, 2026, CC BY 4.0. <a href="https://arxiv.org/pdf/2610.00671v1">Read the PDF.</a></p>
+      <p><strong>Editorial method:</strong> Google Technical Writing’s <a href="https://developers.google.com/tech-writing/one/audience">Audience</a>, <a href="https://developers.google.com/tech-writing/one/documents">Documents</a>, <a href="https://developers.google.com/tech-writing/one/paragraphs">Paragraphs</a>, <a href="https://developers.google.com/tech-writing/one/clear-sentences">Clear sentences</a>, and <a href="https://developers.google.com/tech-writing/two/illustrations">Illustrating</a>. The <a href="storyboard.html">public storyboard</a> maps these lessons to the article’s structure and figures.</p>
+      <p><strong>Visual reference:</strong> 3Blue1Brown’s <a href="https://www.3blue1brown.com/lessons/matrix-multiplication/">Matrix multiplication as composition</a> and <a href="https://www.3blue1brown.com/lessons/backpropagation/">What is backpropagation really doing?</a> informed the use of progressive reveals, persistent colors, and a visual explanation before symbolic detail. The scenes here are original and independently produced.</p>
+      <p><strong>Reproducibility:</strong> <a href="https://github.com/Gin-Sin/megaflux-explained">Article source, Manim scenes, planner tests, and research ledger.</a> The animations are original explanatory schematics. The local planner is a teaching model; the paper’s GPU performance has not been reproduced here. Last reviewed October 2, 2026.</p>
+    </section>
+    </div>
+  </div>
+</main>
+<footer class="site-footer"><a class="wordmark" href="./">SYSTEMS / EXPLAINED</a><p>An independent reading of MegaFlux v1.<br>Original illustrations rendered with Manim Community.</p><nav aria-label="Footer"><a href="storyboard.html">Editorial storyboard</a><a href="https://github.com/Gin-Sin/megaflux-explained">Code &amp; sources ↗</a><a href="#article">Back to top ↑</a></nav></footer>
+</body>
+</html>
