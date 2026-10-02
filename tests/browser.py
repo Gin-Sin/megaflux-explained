@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 import sys
 from urllib.parse import urljoin, urlparse, unquote
+from urllib.request import urlopen
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +24,7 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda e: errors.append(str(e)))
     page.on("response", lambda r: errors.append(f"HTTP {r.status}: {r.url}") if r.status>=400 else None)
+    documents = {}
     for route in ["", "storyboard.html"]:
         response = page.goto(urljoin(base,route), wait_until="networkidle")
         assert response.status == 200
@@ -37,10 +39,14 @@ with sync_playwright() as p:
             parsed = urlparse(link)
             if parsed.netloc != urlparse(base).netloc:
                 continue
-            result = context.request.get(link.split("#")[0])
-            assert result.status == 200, f"Broken internal link: {link}"
+            target = link.split("#")[0]
+            if target not in documents:
+                # urllib honors standard HTTPS_PROXY settings in remote workspaces.
+                with urlopen(target, timeout=30) as result:
+                    assert result.status == 200, f"Broken internal link: {link}"
+                    documents[target] = result.read().decode("utf-8")
             if parsed.fragment:
-                assert f'id="{unquote(parsed.fragment)}"' in result.text(), f"Missing fragment: {link}"
+                assert f'id="{unquote(parsed.fragment)}"' in documents[target], f"Missing fragment: {link}"
     page.set_viewport_size({"width":1440,"height":1000})
     page.goto(base, wait_until="networkidle")
     assert page.locator("#max-load").inner_text() == "24 → 12"
