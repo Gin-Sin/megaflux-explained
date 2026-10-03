@@ -4,10 +4,11 @@
 
 | Content | Videos | Website |
 | --- | --- | --- |
-| Explanatory prose | Lato `Text` | Self-hosted Lato, with real bold and italic faces |
-| Code and pseudocode | DejaVu Sans Mono `Text` | Self-hosted DejaVu Sans Mono |
+| Explanatory prose | CMU Serif `Text` | Self-hosted CMU Serif, with real bold, italic, and bold italic faces |
+| Code and pseudocode | JetBrains Mono `Text` | Self-hosted JetBrains Mono |
 | Mathematical expressions | Manim `MathTex`, compiled by LaTeX | Pre-rendered KaTeX HTML and accessible MathML |
-| Editorial titles | Computer Modern Serif | Editorial serif heading stack |
+| Editorial titles | CMU Serif | Self-hosted CMU Serif |
+| Website controls | Not applicable | Self-hosted Lato |
 
 Routing and backward contain no code snippets, so they do not introduce a code face unnecessarily. Mathematical expert IDs, loads, weight symbols, gradient partials, and matrices are TeX objects. The forward readiness statements are executable-style pseudocode and use monospace. The renderer rejects missing required fonts instead of silently falling back.
 
@@ -35,4 +36,4 @@ The final review follows the `create-manim-animations` skill's film/design and v
 - `tests/typography.py` uses Chromium's `CSS.getPlatformFontsForNode` to identify the fonts that actually drew prose, code, and math. It checks expanded disclosures, 320/390/768/1440 px viewports, 200% zoom, and no-JavaScript MathML.
 - `tests/browser.py` checks keyboard interaction, video decoding, internal links, browser errors, and responsive layout.
 
-The browser font report identifies **Lato-Regular**, **DejaVuSansMono**, and **KaTeX_Math-Italic** as loaded custom fonts. Visual inspection covers both resting layouts and moving states; a font-family declaration or a final poster alone is insufficient evidence.
+The browser audit checks **CMU Serif** for explanatory prose, **JetBrains Mono** for code, **Lato** for controls, and **KaTeX_Math** for mathematical glyphs. Visual inspection covers both resting layouts and moving states; a font-family declaration or a final poster alone is insufficient evidence. This revision adopts the skill's reference families directly, replacing the earlier Lato prose and DejaVu code choices. Equations retain their actual mathematical typesetting.

@@ -36,7 +36,7 @@ with sync_playwright() as p:
     session.send('DOM.enable');session.send('CSS.enable')
     root=session.send('DOM.getDocument')['root']['nodeId']
     font_report={}
-    for role,selector,expected in [('prose','.article-body .lead','Lato'),('code','pre code','DejaVu Sans Mono'),('math','.math-inline .katex-html .mathnormal','KaTeX_Math')]:
+    for role,selector,expected in [('prose','.article-body .lead','CMU Serif'),('code','pre code','JetBrains Mono'),('controls','#reset-planner','Lato'),('math','.math-inline .katex-html .mathnormal','KaTeX_Math')]:
         node=session.send('DOM.querySelector',{'nodeId':root,'selector':selector})['nodeId']
         fonts=session.send('CSS.getPlatformFontsForNode',{'nodeId':node})['fonts']
         font_report[role]=fonts

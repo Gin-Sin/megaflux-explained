@@ -52,13 +52,13 @@ with sync_playwright() as p:
     assert page.locator("#max-load").inner_text() == "24 → 12"
     # The user's typography requirement: prose, code, and math have separate faces.
     font_roles = page.evaluate("""() => [
-      getComputedStyle(document.querySelector('.article-body p')).fontFamily,
+      getComputedStyle(document.querySelector('.article-body .lead')).fontFamily,
       getComputedStyle(document.querySelector('pre code')).fontFamily,
       getComputedStyle(document.querySelector('.katex-html .mathnormal')).fontFamily
     ]""")
     assert len(set(font_roles)) == 3, font_roles
-    page.evaluate("() => document.fonts.load('15px \"DejaVu Code\"')")
-    page.evaluate("() => document.fonts.load('17px Lato')")
+    page.evaluate("() => document.fonts.load('15px \"JetBrains Mono\"')")
+    page.evaluate("() => document.fonts.load('18px \"CMU Serif\"')")
     page.locator("#replica-budget").select_option("0")
     assert page.locator("#max-load").inner_text() == "24 → 24"
     assert page.locator("#replica-count").inner_text() == "0"

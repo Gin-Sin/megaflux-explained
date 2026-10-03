@@ -22,7 +22,7 @@ Thesis: move some of a hot expert's blocks to spare GPUs, then bring the added w
 
 ## Typography and visual reference
 
-Use Lato for prose and explanatory labels, DejaVu Sans Mono for code, and actual TeX typesetting for every mathematical expression. Video titles use Computer Modern Serif. The website pre-renders KaTeX HTML plus MathML and self-hosts its fonts; fractions, operator limits, matrices, and superscripts therefore remain typeset even with JavaScript disabled. Distinct CSS font-family declarations alone do not count as a typography check: inspect the loaded fonts and rendered glyphs.
+Use the `create-manim-animations` skill's reference families: CMU Serif for prose, explanatory labels, and titles; JetBrains Mono for code; and Computer Modern through LaTeX for mathematical video expressions. The website uses self-hosted CMU Serif for the article, JetBrains Mono for code, and Lato for controls. It pre-renders KaTeX HTML plus MathML and self-hosts the math fonts; fractions, operator limits, matrices, and superscripts therefore remain typeset even with JavaScript disabled. Distinct CSS font-family declarations alone do not count as a typography check: inspect the loaded fonts and rendered glyphs.
 
 Visual references: 3Blue1Brown's [Matrix multiplication as composition](https://www.3blue1brown.com/lessons/matrix-multiplication/) (including its associativity clip) and [What is backpropagation really doing?](https://www.3blue1brown.com/lessons/backpropagation/) (including its weight-nudging clip). Reference footage is inspected locally, not republished. Apply these concrete patterns:
 

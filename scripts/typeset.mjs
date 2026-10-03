@@ -25,7 +25,7 @@ for(const [source,target] of [['content/article.html','site/index.html'],['conte
   });
   if(!html.includes('assets/katex/katex.min.css'))html=html.replace('<link rel="stylesheet" href="style.css">','<link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css">');
   // Existing readers should get the new typography and movies immediately.
-  html=html.replace(/(href|src|poster)="(style\.css|app\.js|assets\/[^"?]+\.(?:mp4|png))"/g,'$1="$2?v=20261003"');
+  html=html.replace(/(href|src|poster)="(style\.css|app\.js|assets\/[^"?]+\.(?:mp4|png))"/g,'$1="$2?v=20261003-fonts2"');
   fs.writeFileSync(path.join(root,target),html);
   manifest.push({page:target,expressions});
   console.log(`Typeset ${expressions.length} expressions in ${target}`);

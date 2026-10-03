@@ -26,7 +26,7 @@ The storyboard source is `docs/ARTICLE_PLAN.md`. Regenerate `content/storyboard.
 
 ## Reproduce the illustrations
 
-Python 3.12, FFmpeg, Cairo, Pango, development headers, LaTeX, `dvisvgm`, and the CMU, Lato, and DejaVu font families are required. On Debian/Ubuntu, the additional typography packages include `fonts-cmu`, `fonts-lato`, `fonts-dejavu-core`, `texlive-latex-extra`, and `dvisvgm`. Rendering fails if a required prose/code/title font is missing. See [Manim installation instructions](https://docs.manim.community/en/stable/installation/uv.html).
+Python 3.12, FFmpeg, Cairo, Pango, development headers, LaTeX, `dvisvgm`, and the CMU Serif and JetBrains Mono font families are required. On Debian/Ubuntu, the additional typography packages include `fonts-cmu`, `fonts-jetbrains-mono`, `texlive-latex-extra`, and `dvisvgm`. Rendering fails if a required prose/code/title font is missing. See [Manim installation instructions](https://docs.manim.community/en/stable/installation/uv.html).
 
 ```sh
 python3 -m venv .venv

@@ -18,7 +18,7 @@ for scene in data:
     roles={item['role'] for item in scene['typography']}
     assert {'prose','title','math'}<=roles
     if scene['scene']=='ForwardPipeline':assert 'code' in roles
-    expected={'prose':'Lato','title':'CMU Serif','code':'DejaVu Sans Mono','math':'LaTeX / Computer Modern'}
+    expected={'prose':'CMU Serif','title':'CMU Serif','code':'JetBrains Mono','math':'LaTeX / Computer Modern'}
     for item in scene['typography']:
         assert item['font']==expected[item['role']]
         if item['role']=='prose':assert not re.search(r'\b(?:W[12]|E\d|dW\d)\b',item['source']),item

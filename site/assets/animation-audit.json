@@ -5,7 +5,7 @@
     "typography": [
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "MEGAFLUX / 01"
       },
       {
@@ -15,12 +15,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Replicate the expert. Redistribute its work."
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "GPU 0"
       },
       {
@@ -35,7 +35,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "GPU 1"
       },
       {
@@ -50,7 +50,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "GPU 2"
       },
       {
@@ -65,7 +65,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "GPU 3"
       },
       {
@@ -80,7 +80,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "weights"
       },
       {
@@ -100,12 +100,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "The longest queue determines the compute load."
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "First copy the weights; the token blocks stay put."
       },
       {
@@ -125,7 +125,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Now move the existing blocks. Keep their expert identity."
       },
       {
@@ -175,7 +175,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Block-load schematic. Copying weights also costs communication."
       }
     ],
@@ -208,7 +208,7 @@
     "typography": [
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "MEGAFLUX / 02"
       },
       {
@@ -218,7 +218,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Each projection waits for its own inputs."
       },
       {
@@ -238,22 +238,22 @@
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC1"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "activation"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC2"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "The weights belong to different phases."
       },
       {
@@ -268,17 +268,17 @@
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC1"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC2"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Separate stages"
       },
       {
@@ -293,22 +293,22 @@
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC1"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "FC2"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "transfer"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "compute"
       },
       {
@@ -318,37 +318,37 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "input ready"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "if ready(W1) and ready(X):"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "    run(FC1)"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Schematic time. An input block is already available."
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "same time"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "if ready(W2) and ready(A):"
       },
       {
         "role": "code",
-        "font": "DejaVu Sans Mono",
+        "font": "JetBrains Mono",
         "source": "    run(FC2)"
       },
       {
@@ -358,12 +358,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "activation ready"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Start a phase when\nits dependencies arrive."
       }
     ],
@@ -396,7 +396,7 @@
     "typography": [
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "MEGAFLUX / 03"
       },
       {
@@ -406,12 +406,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "One gradient tile. Three participating copies."
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Owner"
       },
       {
@@ -426,12 +426,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "waiting"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Replica A"
       },
       {
@@ -446,12 +446,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "waiting"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Replica B"
       },
       {
@@ -466,7 +466,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "waiting"
       },
       {
@@ -476,27 +476,27 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "ready"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "ready"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Two partials are ready.\nThe last one still blocks reduction."
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "ready"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "All three partials are ready.\nNow the owner can reduce this tile."
       },
       {
@@ -506,12 +506,12 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Owner accumulates\nin a fixed order"
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Later tiles compute"
       },
       {
@@ -531,7 +531,7 @@
       },
       {
         "role": "prose",
-        "font": "Lato",
+        "font": "CMU Serif",
         "source": "Illustrative 2 \u00d7 2 values. Reduction overlaps later computation."
       }
     ],

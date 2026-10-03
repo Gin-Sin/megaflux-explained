@@ -1,6 +1,6 @@
 """Dependency-driven, original Manim scenes for arXiv:2610.00671v1.
 
-Typography is semantic: prose=Lato, code=DejaVu Sans Mono, math=MathTex.
+Typography is semantic: prose=CMU Serif, code=JetBrains Mono, math=MathTex.
 3Blue1Brown references inform object continuity, guided attention, and pacing.
 All schedules and the 2x2 gradient values are explanatory, not measurements.
 """
@@ -11,7 +11,7 @@ from manimpango import list_fonts
 
 BG, INK, MUTED = "#101D2D", "#F4F0E6", "#B9C6D4"
 TEAL, AMBER, VIOLET, BLUE = "#65D6BC", "#FFC078", "#B6A3F5", "#82B5EB"
-PROSE_FONT, CODE_FONT, TITLE_FONT = "Lato", "DejaVu Sans Mono", "CMU Serif"
+PROSE_FONT, CODE_FONT, TITLE_FONT = "CMU Serif", "JetBrains Mono", "CMU Serif"
 REGISTRY = []
 
 

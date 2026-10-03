@@ -9,7 +9,7 @@
 @media print{body{background:white;color:black}.site-header,.chapter-nav,.site-footer,.button,.skip,#reading-progress{display:none}.hero,.article-layout{display:block;padding:0}.hero-diagram{max-width:400px;transform:none;margin:25px auto}.hero h1{font-size:50px}.reader-contract{margin:25px 0}.article-body section{break-inside:auto;margin:20px 0;padding:0;border:0}.article-body h2{break-after:avoid}video{display:none}.video-wrap{display:none}.transcript{display:block}.transcript p{display:block}.interactive{box-shadow:none}.takeaway,.table-scroll{break-inside:avoid}a{color:inherit}details>*{display:block!important}}
 
 /* Keep explanatory prose, executable notation, and mathematics visibly distinct. */
-code,pre,kbd,samp{font-family:'CMU Typewriter','DejaVu Sans Mono',Consolas,monospace;font-variant-ligatures:none}
+code,pre,kbd,samp{font-family:var(--code);font-variant-ligatures:none}
 code{font-size:.95em;background:#e9ebdf;padding:2px 5px;border-radius:3px}
 .equation{font-family:'CMU Math','Cambria Math',var(--serif);font-size:27px}
 .code-figure{margin:30px 0;border-radius:7px;overflow:hidden;background:var(--dark);color:#eff4f4}
@@ -26,15 +26,23 @@ code{font-size:.95em;background:#e9ebdf;padding:2px 5px;border-radius:3px}
 @font-face{font-family:'Lato';src:url('assets/fonts/Lato-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Lato';src:url('assets/fonts/Lato-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'Lato';src:url('assets/fonts/Lato-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:'DejaVu Code';src:url('assets/fonts/DejaVuSansMono.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
-:root{--sans:'Lato',ui-sans-serif,system-ui,sans-serif;--code:'DejaVu Code','DejaVu Sans Mono',Consolas,monospace}
+@font-face{font-family:'CMU Serif';src:url('assets/fonts/CMUSerif-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'CMU Serif';src:url('assets/fonts/CMUSerif-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'CMU Serif';src:url('assets/fonts/CMUSerif-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'CMU Serif';src:url('assets/fonts/CMUSerif-BoldItalic.woff') format('woff');font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url('assets/fonts/JetBrainsMono-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+:root{--serif:'CMU Serif',Georgia,serif;--sans:'Lato',ui-sans-serif,system-ui,sans-serif;--code:'JetBrains Mono',monospace;--mono:var(--code)}
+body{font-family:var(--serif);font-size:18px}
+.hero-diagram svg text{font-family:var(--serif)}
+button,input,select,.site-header nav,.chapter-nav,.interactive{font-family:var(--sans)}
 code,pre,kbd,samp{font-family:var(--code);font-variant-ligatures:none}
-.article-body p{font-size:17px}.article-body details p{font-size:15px}
+.article-body p{font-size:19px}.article-body details p{font-size:17px}
+figcaption{font-size:14px}table{font-size:15px}
 .math-inline{font-style:normal}.math-inline .katex{font-size:1.10em}
 .math-display{font-size:20px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 4px;scrollbar-width:thin;scrollbar-color:#9eafa0 transparent}
 .math-display .katex-display{margin:.45em 0}.math-display .katex{font-size:1.13em}
 .equation-stack{padding:13px 10px;margin:28px 0;border-block:1px solid var(--line)}
 .equation-stack .math-display{padding-block:1px}.math-display .katex-display>.katex{min-width:min-content}
 .table-scroll .math-inline{white-space:nowrap}
-@media(max-width:720px){.article-body p{font-size:16px}.article-body details p{font-size:15px}.math-display{font-size:18px}.equation-stack{padding-inline:2px}.code-figure pre{font-size:13px}}
+@media(max-width:720px){.article-body p{font-size:18px}.article-body details p{font-size:16px}.math-display{font-size:18px}.equation-stack{padding-inline:2px}.code-figure pre{font-size:13px}table{font-size:14px}}
 @media print{.math-display{overflow:visible}.math-display .katex-display{white-space:normal}}
