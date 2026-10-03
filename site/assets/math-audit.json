@@ -1,0 +1,272 @@
+[
+  {
+    "page": "site/index.html",
+    "expressions": [
+      {
+        "mode": "inline",
+        "tex": "\\kappa = E\\sum_e \\left(c_e / \\sum_j c_j\\right)^2"
+      },
+      {
+        "mode": "inline",
+        "tex": "c_e"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\kappa=1"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\beta"
+      },
+      {
+        "mode": "inline",
+        "tex": "b_e=\\left\\lceil c_e/\\beta\\right\\rceil"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\beta=128"
+      },
+      {
+        "mode": "inline",
+        "tex": "q_{er}"
+      },
+      {
+        "mode": "block",
+        "tex": "\\underset{q\\in\\mathbb{Z}_{\\ge 0}^{E\\times P}}{\\operatorname{minimize}}\\;\\max_r\\ell_r"
+      },
+      {
+        "mode": "block",
+        "tex": "\\ell_r=\\sum_e q_{er}"
+      },
+      {
+        "mode": "block",
+        "tex": "\\sum_r q_{er}=b_e\\qquad(\\forall e)"
+      },
+      {
+        "mode": "block",
+        "tex": "\\sum_{e:\\,h(e)\\ne r}\\mathbf{1}[q_{er}>0]\\le s"
+      },
+      {
+        "mode": "inline",
+        "tex": "h(e)"
+      },
+      {
+        "mode": "inline",
+        "tex": "e"
+      },
+      {
+        "mode": "inline",
+        "tex": "s"
+      },
+      {
+        "mode": "inline",
+        "tex": "q_{er}"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\tau=\\left\\lceil\\frac{\\sum_e b_e}{P}\\right\\rceil"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\tau"
+      },
+      {
+        "mode": "inline",
+        "tex": "s+2"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_3"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\lambda=12"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "block",
+        "tex": "Z=XW_1,\\qquad A=f(Z)"
+      },
+      {
+        "mode": "block",
+        "tex": "O=AW_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "D_e[t]=p_{t,e}\\,dy_t"
+      },
+      {
+        "mode": "inline",
+        "tex": "dZ"
+      },
+      {
+        "mode": "inline",
+        "tex": "dA=DW_2^{\\mathsf T}"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "dX=dZW_1^{\\mathsf T}"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "dW_2=A^{\\mathsf T}D"
+      },
+      {
+        "mode": "inline",
+        "tex": "dW_1=X^{\\mathsf T}dZ"
+      },
+      {
+        "mode": "inline",
+        "tex": "dZ"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "G_0^{(r)}"
+      },
+      {
+        "mode": "inline",
+        "tex": "r"
+      },
+      {
+        "mode": "inline",
+        "tex": "dW_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "dW_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "dW_2"
+      },
+      {
+        "mode": "block",
+        "tex": "C_{\\lambda}(q)=\\max_r\\bigl(\\ell_r+\\lambda n_r\\bigr)"
+      },
+      {
+        "mode": "block",
+        "tex": "\\lambda=12"
+      },
+      {
+        "mode": "inline",
+        "tex": "n_r"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\kappa"
+      },
+      {
+        "mode": "inline",
+        "tex": "\\frac{1}{0.5+0.5/1.45}\\approx 1.18"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "E_0"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_1"
+      },
+      {
+        "mode": "inline",
+        "tex": "W_2"
+      }
+    ]
+  },
+  {
+    "page": "site/storyboard.html",
+    "expressions": [
+      {
+        "mode": "inline",
+        "tex": "\\lambda=12"
+      }
+    ]
+  }
+]

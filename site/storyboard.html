@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="The audience, learning objectives, complete skeleton, and Manim storyboard behind MegaFlux, explained, informed by Google Technical Writing.">
-<title>The editorial storyboard — MegaFlux, explained</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
+<title>The editorial storyboard — MegaFlux, explained</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css?v=20261003"></head>
 <body><a class="skip" href="#storyboard">Skip to storyboard</a>
 <header class="site-header"><a class="wordmark" href="./"><span class="brand-symbol" aria-hidden="true">m<span>f</span></span> SYSTEMS / EXPLAINED</a><nav aria-label="Site"><a href="./">Article</a><a href="https://arxiv.org/html/2610.00671v1">Paper ↗</a><a href="https://github.com/Gin-Sin/megaflux-explained">Source ↗</a></nav></header>
 <main class="story-main" id="storyboard"><p class="eyebrow">BEHIND THE ARTICLE / EDITORIAL DESIGN</p><h1>How this article<br><em>teaches the paper.</em></h1>
@@ -44,8 +44,43 @@
 </tbody>
 </table></div>
 <h2>Typography and visual reference</h2>
-<p>Keep three typographic roles distinct: sans-serif for prose and explanatory labels; Computer Modern Typewriter for code and pseudocode; Computer Modern Serif / TeX for mathematical expressions. Headlines retain a larger editorial serif. Code appears in a dark, labeled panel with restrained syntax colors. Font files are self-hosted; attribution and the OFL license accompany them.</p>
-<p>Visual references: 3Blue1Brown's <a href="https://www.3blue1brown.com/lessons/matrix-multiplication/">Matrix multiplication as composition</a> and <a href="https://www.3blue1brown.com/lessons/backpropagation/">What is backpropagation really doing?</a>. Apply the pedagogical approach: establish the objects, preserve their color identities as they move, reveal the next dependency, pause, then introduce symbols. The scenes are original; no reference footage is republished. The forward scene uses actual Manim MathTex readiness expressions, distinct from its prose labels.</p>
+<p>Use Lato for prose and explanatory labels, DejaVu Sans Mono for code, and actual TeX typesetting for every mathematical expression. Video titles use Computer Modern Serif. The website pre-renders KaTeX HTML plus MathML and self-hosts its fonts; fractions, operator limits, matrices, and superscripts therefore remain typeset even with JavaScript disabled. Distinct CSS font-family declarations alone do not count as a typography check: inspect the loaded fonts and rendered glyphs.</p>
+<p>Visual references: 3Blue1Brown's <a href="https://www.3blue1brown.com/lessons/matrix-multiplication/">Matrix multiplication as composition</a> (including its associativity clip) and <a href="https://www.3blue1brown.com/lessons/backpropagation/">What is backpropagation really doing?</a> (including its weight-nudging clip). Reference footage is inspected locally, not republished. Apply these concrete patterns:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Reference pattern</th>
+<th>Original MegaFlux application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carry a mathematical object through a change of representation</td>
+<td>Forward weight symbols become schedule labels, then the same labeled stages move into separate lanes.</td>
+</tr>
+<tr>
+<td>Keep color attached to meaning</td>
+<td>Amber identifies the hot expert/weights; each gradient contributor keeps its color in the sum. Labels reinforce color.</td>
+</tr>
+<tr>
+<td>Move an existing object instead of replacing a whole frame</td>
+<td>Routing blocks follow visible paths to their new GPU; the total stays on screen.</td>
+</tr>
+<tr>
+<td>Draw attention to the currently relevant dependency</td>
+<td>An outline isolates the busy queue, the first readiness gate, or the last missing gradient partial.</td>
+</tr>
+<tr>
+<td>Make change in one quantity visibly affect another</td>
+<td>GPU counts update when blocks arrive; the accumulator updates when a contribution arrives.</td>
+</tr>
+<tr>
+<td>Pause after a conceptual change</td>
+<td>Reading holds follow setup, readiness, and the final equation.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The scenes are independently authored, with no copied characters or footage. Actual <code>MathTex</code> objects render all mathematical video labels. Code appears only where useful (the forward readiness rule); the other scenes do not introduce artificial code panels.</p>
 <h2>Article skeleton</h2>
 <div class="table-scroll"><table>
 <thead>
@@ -109,38 +144,39 @@
 </table></div>
 <h2>Storyboard: original Manim illustrations</h2>
 <p>All time widths are schematic. The dark background, amber work blocks, teal progress, and violet gradient tiles remain consistent. Color is reinforced by labels. Use native video controls, no autoplay, PNG posters, HTML transcripts, and text explanations.</p>
-<h3>Scene 1 — <code>RoutingSkew</code> (~13 seconds)</h3><figure><img src="assets/routing-skew.png" alt="Final frame of Manim scene 1; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
+<h3>Scene 1 — <code>RoutingSkew</code> (~23 seconds)</h3><figure><img src="assets/routing-skew.png?v=20261003" alt="Final frame of Manim scene 1; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
 <p>Caption: <strong>Redistributing the same expert's blocks shortens the busiest queue.</strong></p>
 <ol>
-<li>Establish four GPU lanes and one owner expert per lane. Show 12 amber E0 blocks on GPU 0 and 4 locally owned blocks on each other GPU. Label “24 blocks total.”</li>
-<li>Draw a maximum-load marker and label “Slowest GPU: 12 blocks.” Explain that overlap within a GPU does not change which GPU owns the work.</li>
-<li>Reveal E0 replica labels on GPUs 1–3. Mark that weights must also move.</li>
-<li>Animate two E0 blocks to each of GPUs 1–3. Preserve colors and block identities. Finish with six blocks per GPU.</li>
-<li>Replace the load label with “Slowest GPU: 6 blocks.” Add “Compute-only illustration; replication has a cost.”</li>
+<li>Establish four GPU lanes and their expert identities with separate prose and TeX labels. Reveal 12/4/4/4 blocks, the maximum-load equation, and the conserved total of 24.</li>
+<li>Outline the busy queue and emphasize the maximum. Pause before introducing the solution.</li>
+<li>Copy the hot expert's weight badge into three spare slots, with the original work blocks held in place. A replica duplicates parameters.</li>
+<li>Highlight and move the original amber blocks along continuous paths, two per receiver. Update donor and receiver counts and the maximum on each arrival: 12 → 10 → 8 → 6. A work assignment moves rather than duplicates.</li>
+<li>Emphasize the final maximum of 6 and the unchanged sum of 24. Hold on the completed diagram.</li>
 </ol>
-<p>Source: §2 and §3.1. Deliberately reduced to four GPUs, four experts, and one replica slot per receiver; the paper evaluates eight GPUs. No elapsed-time or measured-speedup implication.</p>
-<h3>Scene 2 — <code>ForwardPipeline</code> (~13 seconds)</h3><figure><img src="assets/forward-pipeline.png" alt="Final frame of Manim scene 2; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
-<p>Caption: <strong>FC1 can begin after W1 arrives while W2 is still moving.</strong></p>
+<p>Source: §§2–3.1. Four GPUs simplify the eight-GPU paper setup. Counts model equal-cost blocks; they do not establish a measured 2× speedup.</p>
+<h3>Scene 2 — <code>ForwardPipeline</code> (~27 seconds)</h3><figure><img src="assets/forward-pipeline.png?v=20261003" alt="Final frame of Manim scene 2; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
+<p>Caption: <strong>FC1 can begin after its weights arrive while the next projection's weights are still moving.</strong></p>
 <ol>
-<li>Establish a separate-stage strip: W1 transfer, W2 transfer, FC1, FC2 in sequence. State that input is ready in this example.</li>
-<li>Establish two pipelined lanes: weight transfer and replica compute. Reveal W1 transfer first.</li>
-<li>At W1 readiness, start FC1 under the W2 transfer. Show a vertical dependency cue, not a global barrier.</li>
-<li>Start FC2 only after both FC1's activation and W2 are ready. Highlight the overlapped interval.</li>
-<li>Finish on a stable frame: “Two readiness conditions; no full-replica wait.”</li>
+<li>Write the two projection equations and activation in TeX. Color the weight symbols consistently and identify FC1/FC2 in monospace.</li>
+<li>Carry the weight symbols and operation labels into a separate-stage schedule, retaining identity across representations.</li>
+<li>Copy the same stages into transfer and compute lanes. Dim the baseline to preserve context without competing for attention.</li>
+<li>Move a time cursor with the first weight-transfer fill. Highlight the completed transfer and the available input. Show the readiness rule in a code font.</li>
+<li>Grow the second weight transfer and FC1 computation concurrently, not as unrelated fade-ins. Mark their common interval.</li>
+<li>Update the monospace condition only when the second weights and activation exist, then grow FC2. End on the dependency rule.</li>
 </ol>
-<p>Source: §3.2 and schematic Figure 2. FC1/FC2 timing and transfer durations are invented for teaching. Owned-expert work and finer tiling are omitted from this focused scene and described in prose.</p>
-<h3>Scene 3 — <code>BackwardReduction</code> (~14 seconds)</h3><figure><img src="assets/backward-reduction.png" alt="Final frame of Manim scene 3; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
+<p>Source: §3.2. Input is assumed ready. Durations and widths are schematic. The prose, code, and TeX font roles are visually distinct.</p>
+<h3>Scene 3 — <code>BackwardReduction</code> (~23 seconds)</h3><figure><img src="assets/backward-reduction.png?v=20261003" alt="Final frame of Manim scene 3; described in the storyboard below" style="width:100%;border-radius:8px;margin:20px 0" loading="lazy"></figure>
 <p>Caption: <strong>Reduce a gradient tile when every participating copy has produced its partial.</strong></p>
 <ol>
-<li>Establish owner, replica A, and replica B lanes. Each produces the same numbered gradient tile at a different time.</li>
-<li>Publish the owner's partial and A's partial. Keep the owner-side reduction blocked with “Waiting for replica B.”</li>
-<li>Publish B's partial. Change the dependency indicator to “All tile 0 partials ready.”</li>
-<li>Animate contributions into the owner accumulator in a fixed order. While this happens, reveal later-tile computation in the producer lanes.</li>
-<li>Finish on “Prioritize this expert on every participant.” Describe why prioritizing only one replica does not advance the last prerequisite.</li>
+<li>Establish owner, replica A, and replica B with colored TeX partial-gradient symbols. Write their sum before evaluating it.</li>
+<li>Reveal two illustrative 2×2 partial matrices and mark them ready. Keep replica B pending; outline it as the last prerequisite.</li>
+<li>Reveal B's partial and emphasize its matching term in the sum. Only now expose the owner accumulator.</li>
+<li>Move copies of the three partials into the accumulator in a fixed order. Its displayed values become [[1,2],[0,1]], [[1,3],[3,1]], then [[3,3],[4,2]].</li>
+<li>Grow later-tile progress bars during these contribution transfers and additions. Hold on the completed sum and overlapping work.</li>
 </ol>
-<p>Source: §3.2. Uses three participants for clarity; neither participant count nor bar widths represent measurements. Fixed-order FP32 accumulation is part of the design; bitwise equivalence across arbitrary hardware is not claimed.</p>
+<p>Source: §3.2. The 2×2 values are invented teaching examples. They illustrate gradient addition, not GPU measurements or the paper's parameter dimensions. Fixed-order accumulation and overlap are the paper's mechanisms.</p>
 <h2>Interactive and data storyboard</h2>
-<p>The planner uses four GPUs and four home experts, with adjustable E0 block count and replica budget. Show before/after per-GPU loads, expert identities inside the after bars, the average-load lower bound, total conservation, maximum load, and replica count. A training mode applies the paper's reduction-aware pruning with λ = 12. Label outputs as a block-load model, never as predicted latency. Provide a reset control and live textual results.</p>
+<p>The planner uses four GPUs and four home experts, with adjustable E0 block count and replica budget. Show before/after per-GPU loads, expert identities inside the after bars, the average-load lower bound, total conservation, maximum load, and replica count. A training mode applies the paper's reduction-aware pruning with <span class="math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">\lambda=12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">12</span></span></span></span></span>. Label outputs as a block-load model, never as predicted latency. Provide a reset control and live textual results.</p>
 <p>The evidence panel shows geometric means and maxima as separate, labeled quantities. A semantic table contains the six exact end-to-end speedups from Table 1. An optional Amdahl calculation is explicitly an illustrative inference. Never generate a dense experimental curve from sparse headline values.</p>
 <h2>Review gates</h2>
 <ul>
@@ -149,6 +185,8 @@
 <li>Each numeric paper claim links to a section or table.</li>
 <li>The toy planner conserves blocks, uses integer assignments, and respects replica capacity.</li>
 <li>The article distinguishes the exact mathematical objective, the bounded heuristic, and a latency predictor.</li>
+<li>Check reading holds and transition interiors in all three videos; reject text outside the frame.</li>
+<li>Check actual loaded prose/code/math fonts, all expanded equations, 320–1440 px widths, 200% zoom, and no-JavaScript math.</li>
 <li>Mobile and desktop layouts, video playback, keyboard controls, and all internal links work.</li>
 <li>Publication uploads only this repository's static site and original content.</li>
 </ul>

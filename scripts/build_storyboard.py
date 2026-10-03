@@ -21,5 +21,6 @@ page = '''<!doctype html>
 <p class="lead">The complete skeleton and visual storyboard, from the reader’s prerequisites to the last gradient partial.</p>
 <p>Google’s Technical Writing guidance shapes the order, wording, and illustrations. This page makes those choices inspectable. <a href="./">Read the finished article →</a></p>
 '''+body+'''</main><footer class="site-footer"><a class="wordmark" href="./">SYSTEMS / EXPLAINED</a><p>Independent explanation of arXiv:2610.00671v1.<br>Original scenes rendered with Manim Community.</p><nav aria-label="Footer"><a href="./">Read the article</a><a href="https://github.com/Gin-Sin/megaflux-explained/blob/main/docs/ARTICLE_PLAN.md">Editable source ↗</a></nav></footer></body></html>'''
-(root / "site/storyboard.html").write_text(page)
-print("Built site/storyboard.html")
+(root / "content").mkdir(exist_ok=True)
+(root / "content/storyboard.html").write_text(page)
+print("Built content/storyboard.html; run npm run build to publish its typeset form")

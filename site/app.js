@@ -34,7 +34,7 @@ if(hot) {
     document.querySelector('#replica-count').textContent=result.replicas;
     document.querySelector('#block-total').textContent=total;
     document.querySelector('#ideal-load').textContent=result.target;
-    const cost=training.checked?` The largest owner-side proxy is ${Math.max(...augmentedLoads(result.q,result.owners))} block units (λ = 12).`:'';
+    const cost=training.checked?` The largest owner-side proxy is ${Math.max(...augmentedLoads(result.q,result.owners))} block units (a penalty of 12 per remote replica).`:'';
     document.querySelector('#planner-summary').textContent=`${total} blocks conserved. Busiest GPU: ${maxBefore} → ${maxAfter} blocks; ${result.replicas} remote replicas.${cost}`;
     document.querySelector('#training-note').hidden=!training.checked;
   }

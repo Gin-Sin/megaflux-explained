@@ -22,9 +22,20 @@ Thesis: move some of a hot expert's blocks to spare GPUs, then bring the added w
 
 ## Typography and visual reference
 
-Keep three typographic roles distinct: sans-serif for prose and explanatory labels; Computer Modern Typewriter for code and pseudocode; Computer Modern Serif / TeX for mathematical expressions. Headlines retain a larger editorial serif. Code appears in a dark, labeled panel with restrained syntax colors. Font files are self-hosted; attribution and the OFL license accompany them.
+Use Lato for prose and explanatory labels, DejaVu Sans Mono for code, and actual TeX typesetting for every mathematical expression. Video titles use Computer Modern Serif. The website pre-renders KaTeX HTML plus MathML and self-hosts its fonts; fractions, operator limits, matrices, and superscripts therefore remain typeset even with JavaScript disabled. Distinct CSS font-family declarations alone do not count as a typography check: inspect the loaded fonts and rendered glyphs.
 
-Visual references: 3Blue1Brown's [Matrix multiplication as composition](https://www.3blue1brown.com/lessons/matrix-multiplication/) and [What is backpropagation really doing?](https://www.3blue1brown.com/lessons/backpropagation/). Apply the pedagogical approach: establish the objects, preserve their color identities as they move, reveal the next dependency, pause, then introduce symbols. The scenes are original; no reference footage is republished. The forward scene uses actual Manim MathTex readiness expressions, distinct from its prose labels.
+Visual references: 3Blue1Brown's [Matrix multiplication as composition](https://www.3blue1brown.com/lessons/matrix-multiplication/) (including its associativity clip) and [What is backpropagation really doing?](https://www.3blue1brown.com/lessons/backpropagation/) (including its weight-nudging clip). Reference footage is inspected locally, not republished. Apply these concrete patterns:
+
+| Reference pattern | Original MegaFlux application |
+| --- | --- |
+| Carry a mathematical object through a change of representation | Forward weight symbols become schedule labels, then the same labeled stages move into separate lanes. |
+| Keep color attached to meaning | Amber identifies the hot expert/weights; each gradient contributor keeps its color in the sum. Labels reinforce color. |
+| Move an existing object instead of replacing a whole frame | Routing blocks follow visible paths to their new GPU; the total stays on screen. |
+| Draw attention to the currently relevant dependency | An outline isolates the busy queue, the first readiness gate, or the last missing gradient partial. |
+| Make change in one quantity visibly affect another | GPU counts update when blocks arrive; the accumulator updates when a contribution arrives. |
+| Pause after a conceptual change | Reading holds follow setup, readiness, and the final equation. |
+
+The scenes are independently authored, with no copied characters or footage. Actual `MathTex` objects render all mathematical video labels. Code appears only where useful (the forward readiness rule); the other scenes do not introduce artificial code panels.
 
 ## Article skeleton
 
@@ -43,45 +54,46 @@ Visual references: 3Blue1Brown's [Matrix multiplication as composition](https://
 
 All time widths are schematic. The dark background, amber work blocks, teal progress, and violet gradient tiles remain consistent. Color is reinforced by labels. Use native video controls, no autoplay, PNG posters, HTML transcripts, and text explanations.
 
-### Scene 1 — `RoutingSkew` (~13 seconds)
+### Scene 1 — `RoutingSkew` (~23 seconds)
 
 Caption: **Redistributing the same expert's blocks shortens the busiest queue.**
 
-1. Establish four GPU lanes and one owner expert per lane. Show 12 amber E0 blocks on GPU 0 and 4 locally owned blocks on each other GPU. Label “24 blocks total.”
-2. Draw a maximum-load marker and label “Slowest GPU: 12 blocks.” Explain that overlap within a GPU does not change which GPU owns the work.
-3. Reveal E0 replica labels on GPUs 1–3. Mark that weights must also move.
-4. Animate two E0 blocks to each of GPUs 1–3. Preserve colors and block identities. Finish with six blocks per GPU.
-5. Replace the load label with “Slowest GPU: 6 blocks.” Add “Compute-only illustration; replication has a cost.”
+1. Establish four GPU lanes and their expert identities with separate prose and TeX labels. Reveal 12/4/4/4 blocks, the maximum-load equation, and the conserved total of 24.
+2. Outline the busy queue and emphasize the maximum. Pause before introducing the solution.
+3. Copy the hot expert's weight badge into three spare slots, with the original work blocks held in place. A replica duplicates parameters.
+4. Highlight and move the original amber blocks along continuous paths, two per receiver. Update donor and receiver counts and the maximum on each arrival: 12 → 10 → 8 → 6. A work assignment moves rather than duplicates.
+5. Emphasize the final maximum of 6 and the unchanged sum of 24. Hold on the completed diagram.
 
-Source: §2 and §3.1. Deliberately reduced to four GPUs, four experts, and one replica slot per receiver; the paper evaluates eight GPUs. No elapsed-time or measured-speedup implication.
+Source: §§2–3.1. Four GPUs simplify the eight-GPU paper setup. Counts model equal-cost blocks; they do not establish a measured 2× speedup.
 
-### Scene 2 — `ForwardPipeline` (~13 seconds)
+### Scene 2 — `ForwardPipeline` (~27 seconds)
 
-Caption: **FC1 can begin after W1 arrives while W2 is still moving.**
+Caption: **FC1 can begin after its weights arrive while the next projection's weights are still moving.**
 
-1. Establish a separate-stage strip: W1 transfer, W2 transfer, FC1, FC2 in sequence. State that input is ready in this example.
-2. Establish two pipelined lanes: weight transfer and replica compute. Reveal W1 transfer first.
-3. At W1 readiness, start FC1 under the W2 transfer. Show a vertical dependency cue, not a global barrier.
-4. Start FC2 only after both FC1's activation and W2 are ready. Highlight the overlapped interval.
-5. Finish on a stable frame: “Two readiness conditions; no full-replica wait.”
+1. Write the two projection equations and activation in TeX. Color the weight symbols consistently and identify FC1/FC2 in monospace.
+2. Carry the weight symbols and operation labels into a separate-stage schedule, retaining identity across representations.
+3. Copy the same stages into transfer and compute lanes. Dim the baseline to preserve context without competing for attention.
+4. Move a time cursor with the first weight-transfer fill. Highlight the completed transfer and the available input. Show the readiness rule in a code font.
+5. Grow the second weight transfer and FC1 computation concurrently, not as unrelated fade-ins. Mark their common interval.
+6. Update the monospace condition only when the second weights and activation exist, then grow FC2. End on the dependency rule.
 
-Source: §3.2 and schematic Figure 2. FC1/FC2 timing and transfer durations are invented for teaching. Owned-expert work and finer tiling are omitted from this focused scene and described in prose.
+Source: §3.2. Input is assumed ready. Durations and widths are schematic. The prose, code, and TeX font roles are visually distinct.
 
-### Scene 3 — `BackwardReduction` (~14 seconds)
+### Scene 3 — `BackwardReduction` (~23 seconds)
 
 Caption: **Reduce a gradient tile when every participating copy has produced its partial.**
 
-1. Establish owner, replica A, and replica B lanes. Each produces the same numbered gradient tile at a different time.
-2. Publish the owner's partial and A's partial. Keep the owner-side reduction blocked with “Waiting for replica B.”
-3. Publish B's partial. Change the dependency indicator to “All tile 0 partials ready.”
-4. Animate contributions into the owner accumulator in a fixed order. While this happens, reveal later-tile computation in the producer lanes.
-5. Finish on “Prioritize this expert on every participant.” Describe why prioritizing only one replica does not advance the last prerequisite.
+1. Establish owner, replica A, and replica B with colored TeX partial-gradient symbols. Write their sum before evaluating it.
+2. Reveal two illustrative 2×2 partial matrices and mark them ready. Keep replica B pending; outline it as the last prerequisite.
+3. Reveal B's partial and emphasize its matching term in the sum. Only now expose the owner accumulator.
+4. Move copies of the three partials into the accumulator in a fixed order. Its displayed values become [[1,2],[0,1]], [[1,3],[3,1]], then [[3,3],[4,2]].
+5. Grow later-tile progress bars during these contribution transfers and additions. Hold on the completed sum and overlapping work.
 
-Source: §3.2. Uses three participants for clarity; neither participant count nor bar widths represent measurements. Fixed-order FP32 accumulation is part of the design; bitwise equivalence across arbitrary hardware is not claimed.
+Source: §3.2. The 2×2 values are invented teaching examples. They illustrate gradient addition, not GPU measurements or the paper's parameter dimensions. Fixed-order accumulation and overlap are the paper's mechanisms.
 
 ## Interactive and data storyboard
 
-The planner uses four GPUs and four home experts, with adjustable E0 block count and replica budget. Show before/after per-GPU loads, expert identities inside the after bars, the average-load lower bound, total conservation, maximum load, and replica count. A training mode applies the paper's reduction-aware pruning with λ = 12. Label outputs as a block-load model, never as predicted latency. Provide a reset control and live textual results.
+The planner uses four GPUs and four home experts, with adjustable E0 block count and replica budget. Show before/after per-GPU loads, expert identities inside the after bars, the average-load lower bound, total conservation, maximum load, and replica count. A training mode applies the paper's reduction-aware pruning with <math-inline>\lambda=12</math-inline>. Label outputs as a block-load model, never as predicted latency. Provide a reset control and live textual results.
 
 The evidence panel shows geometric means and maxima as separate, labeled quantities. A semantic table contains the six exact end-to-end speedups from Table 1. An optional Amdahl calculation is explicitly an illustrative inference. Never generate a dense experimental curve from sparse headline values.
 
@@ -92,5 +104,7 @@ The evidence panel shows geometric means and maxima as separate, labeled quantit
 - Each numeric paper claim links to a section or table.
 - The toy planner conserves blocks, uses integer assignments, and respects replica capacity.
 - The article distinguishes the exact mathematical objective, the bounded heuristic, and a latency predictor.
+- Check reading holds and transition interiors in all three videos; reject text outside the frame.
+- Check actual loaded prose/code/math fonts, all expanded equations, 320–1440 px widths, 200% zoom, and no-JavaScript math.
 - Mobile and desktop layouts, video playback, keyboard controls, and all internal links work.
 - Publication uploads only this repository's static site and original content.

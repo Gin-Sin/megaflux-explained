@@ -1,0 +1,561 @@
+[
+  {
+    "scene": "RoutingSkew",
+    "duration": 22.7,
+    "typography": [
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "MEGAFLUX / 01"
+      },
+      {
+        "role": "title",
+        "font": "CMU Serif",
+        "source": "Follow the same blocks"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Replicate the expert. Redistribute its work."
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "GPU 0"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_0"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_0 = 12"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "GPU 1"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_1"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_1 = 4"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "GPU 2"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_2"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_2 = 4"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "GPU 3"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_3"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_3 = 4"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "weights"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_0"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\max_r\\ell_r = 12"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\sum_r\\ell_r = 24"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "The longest queue determines the compute load."
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "First copy the weights; the token blocks stay put."
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_0"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_0"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "E_0"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Now move the existing blocks. Keep their expert identity."
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_0 = 10"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_1 = 6"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\max_r\\ell_r = 10"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_0 = 8"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_2 = 6"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\max_r\\ell_r = 8"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_0 = 6"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\ell_3 = 6"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\max_r\\ell_r = 6"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Block-load schematic. Copying weights also costs communication."
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "straggler and conserved total",
+        "time": 5.0,
+        "overflow": []
+      },
+      {
+        "name": "weights copied before work moves",
+        "time": 9.1,
+        "overflow": []
+      },
+      {
+        "name": "same blocks balanced across four GPUs",
+        "time": 19.2,
+        "overflow": []
+      },
+      {
+        "name": "final reading hold",
+        "time": 22.7,
+        "overflow": []
+      }
+    ]
+  },
+  {
+    "scene": "ForwardPipeline",
+    "duration": 26.6,
+    "typography": [
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "MEGAFLUX / 02"
+      },
+      {
+        "role": "title",
+        "font": "CMU Serif",
+        "source": "Let readiness release the work"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Each projection waits for its own inputs."
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "Z = X W_1"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "A = f(Z)"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "O = A W_2"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC1"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "activation"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC2"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "The weights belong to different phases."
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "W_1"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "W_2"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC1"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC2"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Separate stages"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "W_1"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "W_2"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC1"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "FC2"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "transfer"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "compute"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "X"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "input ready"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "if ready(W1) and ready(X):"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "    run(FC1)"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Schematic time. An input block is already available."
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "same time"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "if ready(W2) and ready(A):"
+      },
+      {
+        "role": "code",
+        "font": "DejaVu Sans Mono",
+        "source": "    run(FC2)"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "A"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "activation ready"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Start a phase when\nits dependencies arrive."
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "projection equations with isolated weight symbols",
+        "time": 5.3,
+        "overflow": []
+      },
+      {
+        "name": "first readiness gate opens",
+        "time": 14.4,
+        "overflow": []
+      },
+      {
+        "name": "W2 transfer and FC1 grow concurrently",
+        "time": 19.2,
+        "overflow": []
+      },
+      {
+        "name": "final reading hold",
+        "time": 26.6,
+        "overflow": []
+      }
+    ]
+  },
+  {
+    "scene": "BackwardReduction",
+    "duration": 22.3,
+    "typography": [
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "MEGAFLUX / 03"
+      },
+      {
+        "role": "title",
+        "font": "CMU Serif",
+        "source": "The last partial opens the gate"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "One gradient tile. Three participating copies."
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Owner"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "G_0^{(0)}"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "waiting"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Replica A"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "G_0^{(1)}"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}0&1\\\\3&0\\end{pmatrix}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "waiting"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Replica B"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "G_0^{(2)}"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}2&0\\\\1&1\\end{pmatrix}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "waiting"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "dW_0 = G_0^{(0)} + G_0^{(1)} + G_0^{(2)}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "ready"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "ready"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Two partials are ready.\nThe last one still blocks reduction."
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "ready"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "All three partials are ready.\nNow the owner can reduce this tile."
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Owner accumulates\nin a fixed order"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Later tiles compute"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}1&3\\\\3&1\\end{pmatrix}"
+      },
+      {
+        "role": "math",
+        "font": "LaTeX / Computer Modern",
+        "source": "\\begin{pmatrix}3&3\\\\4&2\\end{pmatrix}"
+      },
+      {
+        "role": "prose",
+        "font": "Lato",
+        "source": "Illustrative 2 \u00d7 2 values. Reduction overlaps later computation."
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "reduction blocked on replica B",
+        "time": 7.0,
+        "overflow": []
+      },
+      {
+        "name": "all producers ready before accumulation",
+        "time": 10.8,
+        "overflow": []
+      },
+      {
+        "name": "three partials accumulated while later tiles progress",
+        "time": 19.3,
+        "overflow": []
+      },
+      {
+        "name": "final reading hold",
+        "time": 22.3,
+        "overflow": []
+      }
+    ]
+  }
+]

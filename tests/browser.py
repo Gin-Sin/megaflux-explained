@@ -54,11 +54,11 @@ with sync_playwright() as p:
     font_roles = page.evaluate("""() => [
       getComputedStyle(document.querySelector('.article-body p')).fontFamily,
       getComputedStyle(document.querySelector('pre code')).fontFamily,
-      getComputedStyle(document.querySelector('.equation')).fontFamily
+      getComputedStyle(document.querySelector('.katex-html .mathnormal')).fontFamily
     ]""")
     assert len(set(font_roles)) == 3, font_roles
-    page.evaluate("() => document.fonts.load('15px \"CMU Typewriter\"')")
-    page.evaluate("() => document.fonts.load('27px \"CMU Math\"')")
+    page.evaluate("() => document.fonts.load('15px \"DejaVu Code\"')")
+    page.evaluate("() => document.fonts.load('17px Lato')")
     page.locator("#replica-budget").select_option("0")
     assert page.locator("#max-load").inner_text() == "24 → 24"
     assert page.locator("#replica-count").inner_text() == "0"
@@ -76,8 +76,8 @@ with sync_playwright() as p:
     for video in page.locator("video").all():
         video.evaluate("v => {v.muted=true; v.load();}")
         video.evaluate("v => new Promise((resolve,reject)=>{if(v.readyState>=2)return resolve();v.addEventListener('loadeddata',resolve,{once:true});v.addEventListener('error',()=>reject(new Error('Video decode failed')),{once:true});})")
-        assert video.evaluate("v => v.videoWidth") == 1280
-        assert 9 < video.evaluate("v => v.duration") < 20
+        assert video.evaluate("v => v.videoWidth") == 1920
+        assert 20 < video.evaluate("v => v.duration") < 40
         video.evaluate("v => v.play()")
         page.wait_for_timeout(250)
         assert video.evaluate("v => v.currentTime") > 0
